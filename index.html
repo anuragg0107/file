@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="navbar">
+        <p> </p>
+    </div>
+    <button>
+        <a href="dashboard.html">Dashboard</a>
+    </button>
+    <h1>Add Students Data</h1>
+   <form id="students_data" onsubmit="storeData(event)">
+       <input type="text" id="name" placeholder="Name">
+       <input type="text" id="course" placeholder="Course">
+       <input type="number" id="unit" placeholder="Unit">
+       <input type="url" id="image" placeholder="Image">
+       <input type="number" id="batch" placeholder="Ft-Web Batch No.">
+       <input type="submit" id="btn">
+   </form>
+
+</body>
+</html>
+<script>
+
+// function Student(n,c,u,i,b){
+//         this.name=n;
+//         this.course=c;
+//         this.unit=u;
+//         this.image=i;
+//         this.batch='ft-Web${b}';
+//     }
+
+// function storeData(event){
+    
+//     event.preventDefault();
+//     let form= document.getElementById("students_data");
+//     let name=form.name.value;
+//     let course=form.course.value;
+//     let unit=form.unit.value;
+//     let image=form.image.value;
+//     let batch= form.batch.value;
+
+//     let s= new Student(name,course,unit,image,batch);
+//     let data= JSON.parse(localStorage.getItem("students")) || [];
+
+//     data.push(s);
+
+//     localStorage.setItem("students",JSON.stringify(data))
+//     console.log(name,course,unit,image,batch)
+// }
+
+function Student(n,c,u,i,b){
+  this.name=n;
+ this.course=c;
+  this.unit=u;
+  this.image=i;
+ this.batch=`Ft-Web${b}`;
+}
+function storeData(event){
+  event.preventDefault();
+  let form =document.getElementById("students_data");
+  let name=form.name.value;
+  let course=form.course.value;
+  let unit=  form.unit.value;
+  let image = form.image.value;
+  let batch= form.batch.value;
+  let s1=new Student(name,course,unit,image,batch);
+  let data=JSON.parse(localStorage.getItem('students')) || [];
+  data.push(s1);
+ localStorage.setItem('students',JSON.stringify(data));
+  console.log(s1);
+}
+
+function calculate(){
+  let data=JSON.parse(localStorage.getItem("students")) || [];
+  let obj={};
+  for(let i=0; i<data.length; i++){
+    if(!obj[data[i].batch]){
+      obj[data[i].batch]=0;
+ }
+}
+  for(let i=0;i<data.length;i++){
+    obj[data[i].batch]++;
+ }
+  console.log(obj);
+}
+calculate();
+
+
+
+</script>
